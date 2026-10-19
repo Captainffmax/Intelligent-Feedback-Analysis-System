@@ -461,4 +461,3 @@ With the system running, `./tunnel.sh` opens free Cloudflare quick-tunnel links 
 - Administrator passwords are stored only as bcrypt hashes; dashboard sessions use signed JWTs that expire after 8 hours.
 - Anonymous submissions are stored with `student_id = "ANONYMOUS"` and no name.
 - The MongoDB port (27017) has no password in the default local setup; do not expose it to the network.
-# Intelligent-Feedback-Analysis-System

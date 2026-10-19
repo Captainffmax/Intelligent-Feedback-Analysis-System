@@ -1,0 +1,42 @@
+{
+  "name": "feedback-ingestion-pwa",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Mobile-first, low-bandwidth Student Feedback Ingestion Node (React + Vite + Workbox PWA) for the Intelligent Feedback Analysis System.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.0",
+    "axios": "^1.7.2",
+    "idb": "^8.0.0",
+    "workbox-window": "^7.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.3.1",
+    "vite-plugin-pwa": "^0.20.0",
+    "workbox-build": "^7.1.0",
+    "workbox-core": "^7.1.0",
+    "workbox-precaching": "^7.1.0",
+    "workbox-routing": "^7.1.0",
+    "workbox-strategies": "^7.1.0",
+    "workbox-background-sync": "^7.1.0",
+    "tailwindcss": "^3.4.4",
+    "postcss": "^8.4.39",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

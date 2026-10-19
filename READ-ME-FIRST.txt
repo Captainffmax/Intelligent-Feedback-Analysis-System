@@ -1,0 +1,134 @@
+INTELLIGENT FEEDBACK ANALYSIS SYSTEM
+Setting it up on a Windows machine
+====================================================================
+
+This folder contains the SOURCE CODE only. Two large folders were left
+out on purpose, because they are built from scratch on each machine and
+would not work if copied:
+
+    backend\.venv              the Python environment (6.5 GB)
+    frontend-pwa\node_modules  the JavaScript packages (142 MB)
+
+Both are recreated by the steps below. Read
+"IFAS-Windows-Setup-and-Defence-Guide.docx" for the full explanation —
+this file is the short version.
+
+
+WHAT YOU NEED FIRST
+--------------------------------------------------------------------
+  1. Python 3.12 or 3.13     https://www.python.org/downloads/
+     -> TICK "Add python.exe to PATH" on the first install screen.
+  2. Node.js (LTS)           https://nodejs.org
+  3. MongoDB Community       https://www.mongodb.com/try/download/community
+     -> Install it "as a Service" so it starts automatically.
+  4. An internet connection for the first run (about 3 GB is
+     downloaded: Python packages plus the AI models).
+
+
+STEP 1 - PUT THE FOLDER IN PLACE
+--------------------------------------------------------------------
+Copy this folder to:
+
+    C:\IFAS
+
+Avoid folder names with spaces, and avoid OneDrive folders — OneDrive
+corrupts the Python environment while it is being built.
+
+
+STEP 2 - BUILD THE PYTHON ENVIRONMENT
+--------------------------------------------------------------------
+Open Command Prompt and run these one at a time. The last three take
+several minutes each.
+
+    cd /d C:\IFAS\backend
+    python -m venv .venv
+    .venv\Scripts\activate
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements.txt
+    python -m pip install -r ..\admin-dashboard\requirements.txt
+    python -m spacy download en_core_web_sm
+
+Check it worked:
+
+    python -c "import uvicorn, streamlit, spacy; print('all libraries OK')"
+
+
+STEP 3 - CREATE THE ADMINISTRATOR ACCOUNT
+--------------------------------------------------------------------
+MongoDB must be running first. Then:
+
+    cd /d C:\IFAS\backend
+    .venv\Scripts\activate
+    python -m scripts.seed --reset
+
+The username and password come from backend\.env.
+
+
+STEP 4 - BUILD THE STUDENT APP
+--------------------------------------------------------------------
+Double-click:
+
+    build-frontend.bat
+
+There is nothing to type. It installs the JavaScript packages and
+compiles the app. A few minutes the first time.
+
+
+STEP 5 - RUN IT
+--------------------------------------------------------------------
+Right-click deploy.bat and choose "Run as administrator".
+
+Two windows open. Wait until the backend window says
+"Application startup complete" — 1 to 4 minutes on the first run while
+the AI models load.
+
+Then open, on this machine or any phone on the same Wi-Fi:
+
+    Students   http://<this-machine-IP>:8000
+    Dashboard  http://<this-machine-IP>:8501
+
+deploy.bat prints the address for you. Find it yourself with: ipconfig
+
+To stop everything, double-click stop.bat.
+
+
+IF PHONES CANNOT CONNECT
+--------------------------------------------------------------------
+The Windows Firewall is blocking them. In an Administrator Command
+Prompt:
+
+    netsh advfirewall firewall add rule name="IFAS" dir=in action=allow protocol=TCP localport=8000
+    netsh advfirewall firewall add rule name="IFAS Dashboard" dir=in action=allow protocol=TCP localport=8501
+
+Do NOT open port 27017. That is the database and it has no password.
+
+
+DEVELOPMENT VS PRODUCTION
+--------------------------------------------------------------------
+    start.bat    development — live reload, this machine only (port 5173)
+    deploy.bat   production  — serves the built app to the whole network
+
+The backend serves the student app itself, so there is no separate app
+server, and nothing needs rebuilding when the network or IP changes.
+
+
+IMPORTANT - THE .env FILE
+--------------------------------------------------------------------
+backend\.env holds the Google Gemini API key, the security key and the
+administrator password. Treat it as a password:
+
+  * do not commit it to GitHub or email it
+  * do not put it in the project report
+  * do not display it on screen during a presentation
+
+backend\.env.example is the safe version to show — same settings with
+the secrets removed.
+
+The Gemini key is on a FREE tier: about 5 requests per MINUTE plus a
+small daily cap. Gemini is used for the dashboard's AI summary AND to
+double-check uncertain sentiment on new submissions, so both draw on
+the same quota. When it runs out, summaries fail until the limit
+resets, while submissions still save using the DistilBERT label.
+Enable billing on the key, or use it sparingly.
+
+See README.md for the full project documentation.

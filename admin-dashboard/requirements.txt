@@ -1,0 +1,10 @@
+# ==========================================================================
+# Intelligent Feedback Analysis System — Admin Dashboard Dependencies
+# Streamlit analytics panel with embedded Chart.js visualisations.
+# (Python 3.10 – 3.13 compatible — `>=` bounds resolve cp313 wheels.)
+# ==========================================================================
+streamlit>=1.39.0        # Administrative analytics UI (3.13 support)
+pymongo>=4.9.0           # Synchronous Mongo reads for the $lookup aggregation
+python-dotenv>=1.0.1     # Load DB URI / backend endpoint from local .env
+requests>=2.32.3         # Call the backend auth + Tier-D endpoints
+pandas>=2.2.3            # Tabular shaping of feedback records (3.13 wheels)

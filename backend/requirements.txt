@@ -1,0 +1,48 @@
+# ==========================================================================
+# Intelligent Feedback Analysis System for Academic Services
+# Backend Dependency Manifest  (Python 3.10 – 3.13)
+# --------------------------------------------------------------------------
+# Layer: FastAPI (Async) + Motor (Async Mongo) + Hybrid AI Pipeline
+# Install: pip install -r requirements.txt
+#
+# NOTE on version constraints: the ML stack uses `>=` lower bounds rather than
+# exact pins so pip can resolve wheels that match your interpreter (e.g. the
+# cp313 wheels required on Python 3.13). If you need fully reproducible builds,
+# freeze exact versions with `pip freeze > requirements.lock` after install.
+# ==========================================================================
+
+# --- Core Asynchronous Web Framework (ASGI) ------------------------------
+fastapi>=0.115.0            # High-performance async REST API framework
+uvicorn[standard]>=0.30.1   # ASGI server (production/dev runtime)
+python-multipart>=0.0.9     # Form / file payload parsing support (OAuth2 login)
+
+# --- Data Validation & Serialization -------------------------------------
+pydantic[email]>=2.9.0      # Strict typing + EmailStr (student email field)
+pydantic-settings>=2.5.0    # Environment-driven configuration binding
+
+# --- Asynchronous MongoDB Driver (Embedded Document Pattern) -------------
+motor>=3.6.0                # Async MongoDB driver (non-blocking single writes)
+pymongo>=4.9.0              # Underlying BSON / ObjectId primitives (3.13 wheels)
+
+# --- Tier A: Tokenization & Cleaning -------------------------------------
+spacy>=3.8.0                # Fast normalization, stop-word + punctuation strip
+# NOTE: After install, download the small English model:
+#   python -m spacy download en_core_web_sm
+
+# --- Tier B: Quantitative Sentiment Classification (DistilBERT) -----------
+transformers>=4.44.0        # Hugging Face pipeline host
+torch>=2.6.0                # Deep-learning backend for the DistilBERT model
+
+# --- Tier C: Semantic Theme Extraction ------------------------------------
+keybert>=0.8.5              # Embedding-based keyword / topic extraction
+sentence-transformers>=3.1.0  # Embedding backend consumed by KeyBERT
+
+# --- Tier D: Qualitative Summarization (The Gemini Core) ------------------
+google-generativeai>=0.8.0  # Gemini 1.5 Flash client for action synthesis
+
+# --- Security / Auth (Administrator credential hashing) -------------------
+bcrypt>=4.1.0              # Direct bcrypt hashing for the Administrator collection
+python-jose[cryptography]>=3.3.0  # JWT issuance for admin sessions
+
+# --- Configuration & Utilities -------------------------------------------
+python-dotenv>=1.0.1        # Loads secrets/endpoints from local .env (no hardcoding)

@@ -1,0 +1,39 @@
+# Streamlit theme — "Feedback Intelligence" editorial light palette.
+# Ported from the High-Fidelity Admin Dashboard Figma design:
+# warm off-white surfaces, muted earthy sentiment colours, indigo-blue accent.
+[theme]
+base = "light"
+primaryColor = "#4255A4"             # indigo-blue accent (primary / focus / links)
+backgroundColor = "#FCFCFC"          # near-white app background
+secondaryBackgroundColor = "#F5F5F4" # warm card / sidebar surface
+textColor = "#111111"                # near-black foreground
+# Self-hosted Outfit — served locally from ./static (no Google Fonts CDN, which
+# is blocked on this host). Setting `font` here changes Streamlit's own theme
+# token so EVERY native widget uses Outfit, not just our injected HTML.
+font = "Outfit, sans-serif"
+
+# One variable woff2 covers 300–800; declare the weights the UI actually uses.
+[[theme.fontFaces]]
+family = "Outfit"
+url = "app/static/outfit-latin.woff2"
+weight = 400
+[[theme.fontFaces]]
+family = "Outfit"
+url = "app/static/outfit-latin.woff2"
+weight = 500
+[[theme.fontFaces]]
+family = "Outfit"
+url = "app/static/outfit-latin.woff2"
+weight = 600
+[[theme.fontFaces]]
+family = "Outfit"
+url = "app/static/outfit-latin.woff2"
+weight = 700
+
+[server]
+headless = true
+# Serve ./static at /app/static/ so the theme fontFaces url resolves locally.
+enableStaticServing = true
+
+[browser]
+gatherUsageStats = false

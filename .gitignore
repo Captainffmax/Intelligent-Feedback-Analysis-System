@@ -1,0 +1,36 @@
+# ---- Secrets / env ----
+.env
+.env.local
+*.local
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# ---- Node / Vite ----
+node_modules/
+dist/
+dev-dist/
+.vite/
+
+# ---- OS / editor ----
+.DS_Store
+.idea/
+.vscode/
+
+# ---- Backups of secret files ----
+*.env.bak
+.env.*.bak
+*.bak
+
+# ---- Local logs / tool settings ----
+.run-logs/
+.claude/
+
+# ---- Report documents (not source code) ----
+Chapter 1-3.txt
+*.docx
+IFAS-*.html
