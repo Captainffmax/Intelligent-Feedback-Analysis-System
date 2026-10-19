@@ -4,6 +4,8 @@ An AI-powered platform that collects student feedback on academic and campus ser
 
 Students submit feedback from a mobile-friendly Progressive Web App (PWA) that keeps working offline. Each submission passes through a four-tier AI pipeline that cleans the text, classifies its sentiment, extracts its key themes and stores the result in MongoDB. Administrators use an analytics dashboard to filter the results, track trends, and generate a Gemini-written action summary for any department.
 
+**Quick links:** [Installation](#installation) · [Running the System](#running-the-system) · [Using the System](#using-the-system) · [Troubleshooting](#troubleshooting)
+
 ---
 
 ## Table of Contents
